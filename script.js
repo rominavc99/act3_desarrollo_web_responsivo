@@ -8,6 +8,7 @@ class FormValidator {
   }
 
   init() {
+    // Asignación de eventos al formulario
     this.form.addEventListener("submit", (event) => this.handleSubmit(event));
     this.form.addEventListener("reset", () => this.handleReset());
     this.form.addEventListener("input", (event) => this.handleInput(event));
@@ -15,6 +16,8 @@ class FormValidator {
 
   handleSubmit(event) {
     event.preventDefault(); // Prevenir el envio directo del formulario
+
+    // Validar el formulario usando la función personalizada
     if (this.validateForm()) {
       this.correctCount++;
       alert("Formulario enviado correctamente.");
@@ -26,13 +29,15 @@ class FormValidator {
   }
 
   handleReset() {
-    this.form.reset();
+    this.form.reset(); // Método reset() para limpiar el formulario
   }
 
   handleInput(event) {
     const input = event.target;
+
+    // Limpiar el mensaje de validación personalizado si el campo es válido
     if (input.validity.valid) {
-      input.setCustomValidity("");
+      input.setCustomValidity(""); // Método setCustomValidity()
     } else {
       input.setCustomValidity("Este campo es obligatorio");
     }
@@ -60,6 +65,12 @@ class FormValidator {
       isValid = false;
     } else {
       ageField.setCustomValidity("");
+    }
+
+    // Verificar la validez del formulario usando checkValidity()
+    if (!this.form.checkValidity()) {
+      isValid = false;
+      this.form.reportValidity(); // Mostrar mensajes de validación
     }
 
     return isValid;
