@@ -5,3 +5,7 @@ body {
 .container {
     margin-top: 50px;
 }
+
+.navbar-brand {
+    margin-left: 15px ;  
+}
